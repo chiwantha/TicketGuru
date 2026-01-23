@@ -1,4 +1,5 @@
 import WidthFitter from "@/components/common/layout/widthFitter/WidthFitter";
+import Button from "@/components/user/button/button/Button";
 import EventCard from "@/components/user/cards/event/EventCard";
 import Hero from "@/components/user/layout/sections/hero/Hero";
 
@@ -11,10 +12,10 @@ const Homepage = () => {
       </section>
 
       {/* SCROLL CONTENT */}
-      <section className="relative z-20 mt-[100vh] min-h-screen bg-white shadow-md">
+      <section className="relative z-20 mt-[100vh] min-h-screen bg-white inset-shadow-sm shadow-md">
         {/* Latest Events */}
         <WidthFitter>
-          <div className="sm:py-6 md:py-20 flex justify-center w-full flex-col space-y-10">
+          <div className="py-12 md:py-20 flex justify-center w-full flex-col space-y-10">
             {/* Header */}
             <div className="space-y-2">
               <h2 className="text-4xl font-bold text-orange-500 text-center">
@@ -38,6 +39,12 @@ const Homepage = () => {
               <EventCard />
               <EventCard />
             </div>
+            <Button
+              title={"View All"}
+              wfull={false}
+              fg={"font-medium text-white text-lg uppercase self-center"}
+              pd={"px-6 py-1.5"}
+            />
           </div>
         </WidthFitter>
       </section>

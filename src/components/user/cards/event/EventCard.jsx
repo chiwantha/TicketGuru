@@ -2,14 +2,44 @@ import React from "react";
 import Button from "../../button/button/Button";
 
 const EventCard = ({ data }) => {
-  const { title, start_time, end_time, venue, card_caption, slug } = data || {};
+  const {
+    title,
+    category,
+    start_time,
+    end_time,
+    venue,
+    date,
+    card_caption,
+    slug,
+  } = data || {};
   return (
-    <div className="rounded-lg shadow-md overflow-hidden">
+    <div
+      className="relative rounded-lg shadow-md hover:shadow-lg transition-all duration-300
+     overflow-hidden hover:scale-105"
+    >
+      {/* Date Banner */}
+      <div
+        className="z-40 text-center absolute -space-y-1.5 flex flex-col text-white
+       top-0 left-4 rounded-b-lg px-3 py-1 bg-orange-500 shadow-md uppercase"
+      >
+        <span className="text-4xl font-bold">{date || `00`}</span>
+        <span>{data || `MON`}</span>
+      </div>
+
       {/* Event Iamge */}
-      <div className="bg-red-500 aspect-359/236 top-0"></div>
-      <div className="p-4 flex-col flex space-y-2">
+      <div className="relative bg-red-500 aspect-359/236 top-0">
+        {/* Category */}
+        <div
+          className="absolute bottom-4 right-4 px-4 py-1 bg-orange-500 text-white font-light 
+      uppercase rounded-lg text-sm shadow-sm"
+        >
+          {category || `Category`}
+        </div>
+      </div>
+      {/* Event Content */}
+      <div className="p-4 flex-col flex space-y-2 bg-white">
         {/* Event Title */}
-        <h3 className="font-bold text-lg uppercase line-clamp-1 text-ellipsis">
+        <h3 className="font-bold text-gray-600 text-xl uppercase line-clamp-1 text-ellipsis">
           {title || `Event Title`}
         </h3>
         {/* Event Time & Venue */}
@@ -23,7 +53,7 @@ const EventCard = ({ data }) => {
         </div>
         <p className="text-[#848484] tracking-normal leading-5 font-light line-clamp-3 text-ellipsis">
           {card_caption ||
-            ` A high-energy house music night featuring deep beats, vibrant vibes,
+            `A high-energy house music night featuring deep beats, vibrant vibes,
           and nonstop dancing till late night`}
         </p>
         <Button

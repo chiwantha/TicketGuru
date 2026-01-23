@@ -2,6 +2,7 @@ import WidthFitter from "@/components/common/layout/widthFitter/WidthFitter";
 import Button from "@/components/user/button/button/Button";
 import EventCard from "@/components/user/cards/event/EventCard";
 import Hero from "@/components/user/layout/sections/hero/Hero";
+import Image from "next/image";
 
 const Homepage = () => {
   return (
@@ -17,7 +18,7 @@ const Homepage = () => {
         <WidthFitter>
           <div className="py-12 md:py-20 flex justify-center w-full flex-col space-y-10">
             {/* Header */}
-            <div className="space-y-2">
+            <div className="-space-y-1">
               <h2 className="text-4xl font-bold text-orange-500 text-center">
                 VIEW OUR EVENTS
               </h2>
@@ -36,8 +37,17 @@ const Homepage = () => {
               <EventCard />
               <EventCard />
               <EventCard />
-              <EventCard />
-              <EventCard />
+              <div
+                className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1 relative rounded-lg shadow-md
+               p-4 aspect-video lg:aspect-auto items-center flex justify-center bg-linear-to-b from-orange-50 to-yellow-50 overflow-hidden"
+              >
+                <Image
+                  src={"/ads/promo.png"}
+                  fill
+                  alt="promo Image"
+                  className="object-cover object-center"
+                />
+              </div>
             </div>
             <Button
               title={"View All"}

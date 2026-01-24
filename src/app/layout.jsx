@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Londrina_Outline } from "next/font/google";
 import "./globals.css";
 import WidthTracker from "@/components/common/layout/widthTracker/WidthTracker";
+import ComingSoonMode from "@/components/common/mode/comingsoon/ComingSoonMode";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +39,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable}  ${londrinaOutline.variable} antialiased`}
       >
-        {children}
+        {process.env.COMING_SOON_MODE === "true" ? (
+          <ComingSoonMode />
+        ) : (
+          children
+        )}
         <WidthTracker />
       </body>
     </html>

@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../../button/button/Button";
+import Image from "next/image";
 
 const EventCard = ({ data }) => {
   const {
@@ -9,6 +10,7 @@ const EventCard = ({ data }) => {
     end_time,
     venue,
     date,
+    face,
     card_caption,
     slug,
   } = data || {};
@@ -30,11 +32,18 @@ const EventCard = ({ data }) => {
       <div className="relative bg-red-500 aspect-359/236 top-0">
         {/* Category */}
         <div
-          className="absolute bottom-4 right-4 px-4 py-1 bg-orange-500 text-white font-light 
+          className="absolute z-40 bottom-4 right-4 px-4 py-1 bg-orange-500 text-white font-light 
       uppercase rounded-lg text-sm shadow-sm"
         >
           {category || `Category`}
         </div>
+
+        <Image
+          src={face ? `/event/face/${face}` : `/event/face/default.png`}
+          alt="/event/face/default.png"
+          fill
+          className="object-center object-cover"
+        />
       </div>
       {/* Event Content */}
       <div className="p-4 flex-col flex space-y-2 bg-white">

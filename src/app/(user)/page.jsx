@@ -39,13 +39,13 @@ const Homepage = () => {
               <EventCard />
               <div
                 className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1 relative rounded-lg shadow-md
-               p-4 aspect-video lg:aspect-auto items-center flex justify-center bg-linear-to-b from-orange-50 to-yellow-50 overflow-hidden"
+                aspect-video lg:aspect-auto items-center flex justify-center bg-linear-to-b from-orange-50 to-yellow-50 overflow-hidden"
               >
                 <Image
-                  src={"/ads/promo.png"}
+                  src={`/ads/promo.png`}
+                  alt="promo.png"
+                  className="object-center object-cover"
                   fill
-                  alt="promo Image"
-                  className="object-cover object-center"
                 />
               </div>
             </div>

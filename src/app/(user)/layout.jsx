@@ -3,7 +3,7 @@ import React from "react";
 
 const layout = ({ children }) => {
   return (
-    <div className="scroll-smooth select-none">
+    <div className="scroll-smooth ">
       <Navbar />
       {children}
     </div>

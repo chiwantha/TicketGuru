@@ -1,7 +1,7 @@
 import Button from "../../button/button/Button";
 import Image from "next/image";
 
-const EventCard = ({ data }) => {
+const EventCard = ({ event }) => {
   const {
     name,
     category,
@@ -9,26 +9,40 @@ const EventCard = ({ data }) => {
     end_time,
     venue,
     date,
-    face,
-    card_caption,
+    face_img,
+    card_description,
     slug,
-  } = data || {};
+  } = event || {};
+
+  const start = start_time.split(":").slice(0, 2).join(":");
+  const end = end_time.split(":").slice(0, 2).join(":");
+
+  const eventDate = date ? new Date(date) : null;
+
+  const day = eventDate
+    ? eventDate.getDate().toString().padStart(2, "0")
+    : "00";
+
+  const month = eventDate
+    ? eventDate.toLocaleString("en-US", { month: "short" }).toUpperCase()
+    : "MON";
+
   return (
     <div
       className="relative rounded-lg shadow-md hover:shadow-lg transition-all duration-300
-     overflow-hidden hover:scale-105"
+     overflow-hidden hover:scale-105 border border-gray-200"
     >
       {/* Date Banner */}
       <div
         className="z-40 text-center absolute -space-y-1.5 flex flex-col text-white
-       top-0 left-4 rounded-b-lg px-3 py-1 bg-orange-500 shadow-md uppercase"
+       top-0 left-4 rounded-b-lg px-3 py-1 bg-orange-500 shadow-md uppercase justify-center"
       >
-        <span className="text-4xl font-bold">{date || `00`}</span>
-        <span>{data || `MON`}</span>
+        <span className="text-3xl  font-bold">{day || `00`}</span>
+        <span className="">{month || `MON`}</span>
       </div>
 
       {/* Event Iamge */}
-      <div className="relative bg-red-500 aspect-359/236 top-0">
+      <div className="relative aspect-359/236 top-0">
         {/* Category */}
         <div
           className="absolute z-40 bottom-4 right-4 px-4 py-1 bg-orange-500 text-white font-light 
@@ -38,7 +52,7 @@ const EventCard = ({ data }) => {
         </div>
 
         <Image
-          src={face ? `/event/face/${face}` : `/event/face/default.png`}
+          src={face_img ? `/event/face/${face_img}` : `/event/face/default.png`}
           alt="/event/face/default.png"
           fill
           className="object-center object-cover"
@@ -54,20 +68,20 @@ const EventCard = ({ data }) => {
         <div className="flex flex-col uppercase -space-y-1.5 text-orange-500">
           <span className="font-medium">
             {start_time
-              ? `${start_time} - ${end_time || "ONWARDS"}`
+              ? `${start} - ${end || "ONWARDS"}`
               : "00:00 AM - 00:00 AM"}
           </span>
           <span className="font-light">{venue || "Venue"}</span>
         </div>
         <p className="text-[#848484] tracking-normal leading-5 font-light line-clamp-3 text-ellipsis">
-          {card_caption ||
+          {card_description ||
             `A high-energy house music night featuring deep beats, vibrant vibes,
           and nonstop dancing till late night`}
         </p>
         <Button
           wfull={true}
           title={`Book Now`}
-          link={slug || `#`}
+          link={`/event/${slug || "#"}`}
           margins={`mt-3`}
         />
       </div>

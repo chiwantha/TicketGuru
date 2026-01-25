@@ -3,7 +3,19 @@ import { NextResponse } from "next/server";
 
 export const GET = async (request) => {
   try {
-    const sql = `SELECT * FROM events WHERE state = 1 ORDER BY created_at DESC LIMIT 8 ;`;
+    const sql = `SELECT 
+    events.name,
+    events.slug,
+    mst_category.category AS category,
+    events.start_time,
+    events.end_time,
+    events.venue,
+    events.date,
+    events.face_img,
+    events.card_description
+     FROM events
+     INNER JOIN mst_category ON events.category_id = mst_category.id
+     WHERE events.state = 1 ORDER BY events.created_at DESC LIMIT 6 ;`;
     const events = await query(sql);
 
     if (!events) {

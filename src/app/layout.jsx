@@ -37,7 +37,8 @@ export default function RootLayout({ children }) {
         <meta name="apple-mobile-web-app-title" content="Your App Name" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable}  ${londrinaOutline.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} 
+         ${londrinaOutline.variable} antialiased`}
       >
         {process.env.COMING_SOON_MODE === "true" ? (
           <ComingSoonMode />

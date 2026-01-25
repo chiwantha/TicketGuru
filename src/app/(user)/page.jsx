@@ -7,7 +7,7 @@ import Image from "next/image";
 async function get_event_cards() {
   try {
     const res = await fetch(`${process.env.NEXT_BASE_URL}/api/user/home`, {
-      next: { revalidate: 60 },
+      cache: "no-store",
     });
 
     if (!res.ok) {
@@ -24,7 +24,6 @@ async function get_event_cards() {
 
 const Homepage = async () => {
   const events = await get_event_cards();
-  console.log(events);
 
   return (
     <main className="relative">
@@ -52,12 +51,11 @@ const Homepage = async () => {
             </div>
             {/* TicketGrid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
-              <EventCard />
+              {events &&
+                events.length > 0 &&
+                events.map((event, index) => (
+                  <EventCard key={index} event={event} />
+                ))}
               <div
                 className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1 relative rounded-lg shadow-md
                 aspect-video lg:aspect-auto items-center flex justify-center bg-linear-to-b from-orange-50 to-yellow-50 overflow-hidden"

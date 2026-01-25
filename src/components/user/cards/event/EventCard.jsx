@@ -1,10 +1,9 @@
-import React from "react";
 import Button from "../../button/button/Button";
 import Image from "next/image";
 
 const EventCard = ({ data }) => {
   const {
-    title,
+    name,
     category,
     start_time,
     end_time,
@@ -49,7 +48,7 @@ const EventCard = ({ data }) => {
       <div className="p-4 flex-col flex space-y-2 bg-white">
         {/* Event Title */}
         <h3 className="font-bold text-gray-600 text-xl uppercase line-clamp-1 text-ellipsis">
-          {title || `Event Title`}
+          {name || `Event Name`}
         </h3>
         {/* Event Time & Venue */}
         <div className="flex flex-col uppercase -space-y-1.5 text-orange-500">

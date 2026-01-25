@@ -4,7 +4,28 @@ import EventCard from "@/components/user/cards/event/EventCard";
 import Hero from "@/components/user/layout/sections/hero/Hero";
 import Image from "next/image";
 
-const Homepage = () => {
+async function get_event_cards() {
+  try {
+    const res = await fetch(`${process.env.NEXT_BASE_URL}/api/user/home`, {
+      next: { revalidate: 60 },
+    });
+
+    if (!res.ok) {
+      console.error(`Failed to Fetch Event Cards : ${res.status}`);
+      return { events: [] };
+    }
+
+    return await res.json();
+  } catch (err) {
+    console.error(`Error Fetching Event Cards : ${err}`);
+    return { events: [] };
+  }
+}
+
+const Homepage = async () => {
+  const events = await get_event_cards();
+  console.log(events);
+
   return (
     <main className="relative">
       {/* HERO (fixed background layer) */}

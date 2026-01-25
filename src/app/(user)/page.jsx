@@ -32,47 +32,61 @@ const Homepage = async () => {
         <Hero />
       </section>
 
-      {/* SCROLL CONTENT */}
-      <section className="relative z-20 mt-[100vh] min-h-screen bg-white inset-shadow-sm shadow-md">
-        {/* Latest Events */}
+      <section className="relative z-20 mt-[100vh] bg-black overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="/assets/crowd.jpg"
+            alt="crowd.png"
+            className="object-cover object-center blur-md"
+            fill
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/70" />
+        </div>
+
+        {/* Content */}
         <WidthFitter>
-          <div className="py-12 md:py-20 flex justify-center w-full flex-col space-y-10">
+          <div className="py-12 md:py-20 flex justify-center w-full flex-col space-y-6">
             {/* Header */}
-            <div className="-space-y-1">
+            <div className="-space-y-1 -mt-2">
               <h2 className="text-4xl font-bold text-orange-500 text-center">
                 VIEW OUR EVENTS
               </h2>
-              <p
-                className="text-gray-400 text-center text-xl
-         leading-tight font-light"
-              >
-                Find Your Facourite Event ANd Book Your Tickets Easily
+              <p className="text-white text-center text-xl leading-tight font-light">
+                Find Your Favourite Event And Book Your Tickets Easily
               </p>
             </div>
-            {/* TicketGrid */}
+
+            {/* Ticket Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {events &&
-                events.length > 0 &&
-                events.map((event, index) => (
-                  <EventCard key={index} event={event} />
-                ))}
-              <div
-                className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1 relative rounded-lg shadow-md
-                aspect-video lg:aspect-auto items-center flex justify-center bg-linear-to-b from-orange-50 to-yellow-50 overflow-hidden"
-              >
+                events
+                  ?.slice(0, 4)
+                  .map((event, index) => (
+                    <EventCard key={index} event={event} />
+                  ))}
+            </div>
+
+            {/* Promo Image */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="relative rounded-lg shadow-md aspect-video overflow-hidden">
                 <Image
-                  src={`/ads/promo.png`}
+                  src="/ads/promo.png"
                   alt="promo.png"
-                  className="object-center object-cover"
+                  className="object-cover object-center"
                   fill
                 />
               </div>
             </div>
+
+            {/* Button */}
             <Button
-              title={"View All"}
+              title="View All"
               wfull={false}
-              fg={"font-medium text-white text-lg uppercase self-center"}
-              pd={"px-6 py-1.5"}
+              fg="font-medium text-white text-lg uppercase self-center"
+              pd="px-6 py-1.5"
             />
           </div>
         </WidthFitter>

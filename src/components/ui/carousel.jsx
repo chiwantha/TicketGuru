@@ -15,40 +15,53 @@ function useCarousel() {
   return context;
 }
 
-function Carousel({
+export function Carousel({
   orientation = "horizontal",
   slidesToShow = 1,
   autoplay = false,
   autoplayDelay = 4000,
+  breakpoints,
   className,
   children,
   ...props
 }) {
-  // ✅ stable autoplay instance
   const autoplayRef = React.useRef(
     Autoplay({
       delay: autoplayDelay,
-      stopOnInteraction: false, // IMPORTANT
+      stopOnInteraction: false, // never stop
     }),
   );
 
   const [carouselRef, api] = useEmblaCarousel(
     {
       axis: orientation === "horizontal" ? "x" : "y",
-      loop: true, // REQUIRED
+      loop: true,
     },
     autoplay ? [autoplayRef.current] : [],
   );
 
-  const scrollPrev = () => {
-    api?.scrollPrev();
-    autoplayRef.current?.reset();
-  };
+  const scrollPrev = () => api?.scrollPrev();
+  const scrollNext = () => api?.scrollNext();
 
-  const scrollNext = () => {
-    api?.scrollNext();
-    autoplayRef.current?.reset();
-  };
+  // Responsive slides
+  const [currentSlides, setCurrentSlides] = React.useState(slidesToShow);
+
+  React.useEffect(() => {
+    if (!breakpoints) return;
+
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width >= 1024 && breakpoints.lg) setCurrentSlides(breakpoints.lg);
+      else if (width >= 768 && breakpoints.md) setCurrentSlides(breakpoints.md);
+      else if (width >= 640 && breakpoints.sm) setCurrentSlides(breakpoints.sm);
+      else if (breakpoints.xs) setCurrentSlides(breakpoints.xs);
+      else setCurrentSlides(slidesToShow);
+    };
+
+    handleResize(); // initial
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [breakpoints, slidesToShow]);
 
   return (
     <CarouselContext.Provider
@@ -56,26 +69,19 @@ function Carousel({
         carouselRef,
         api,
         orientation,
-        slidesToShow,
+        slidesToShow: currentSlides,
         scrollPrev,
         scrollNext,
       }}
     >
-      <div
-        className={cn("relative", className)}
-        role="region"
-        aria-roledescription="carousel"
-        onMouseEnter={() => autoplayRef.current?.stop()} // ✅ PAUSE
-        onMouseLeave={() => autoplayRef.current?.reset()} // ✅ RESUME
-        {...props}
-      >
+      <div className={cn("relative", className)} {...props}>
         {children}
       </div>
     </CarouselContext.Provider>
   );
 }
 
-function CarouselContent({ className, ...props }) {
+export function CarouselContent({ className, ...props }) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
@@ -92,7 +98,7 @@ function CarouselContent({ className, ...props }) {
   );
 }
 
-function CarouselItem({ className, ...props }) {
+export function CarouselItem({ className, ...props }) {
   const { orientation, slidesToShow } = useCarousel();
 
   return (
@@ -110,7 +116,7 @@ function CarouselItem({ className, ...props }) {
   );
 }
 
-function CarouselPrevious({ className, ...props }) {
+export function CarouselPrevious({ className, ...props }) {
   const { orientation, scrollPrev } = useCarousel();
 
   return (
@@ -130,7 +136,7 @@ function CarouselPrevious({ className, ...props }) {
   );
 }
 
-function CarouselNext({ className, ...props }) {
+export function CarouselNext({ className, ...props }) {
   const { orientation, scrollNext } = useCarousel();
 
   return (
@@ -149,11 +155,3 @@ function CarouselNext({ className, ...props }) {
     </Button>
   );
 }
-
-export {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-};

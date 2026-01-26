@@ -108,7 +108,8 @@ const EventCard = ({ event = {} }) => {
       </div>
 
       {/* -------- Event Image -------- */}
-      <div className="relative aspect-359/236 top-0">
+      {/* <div className="relative aspect-359/236 top-0"> */}
+      <div className="relative aspect-square top-0">
         {/* Category */}
         <div
           className="absolute z-40 bottom-4 right-4 px-4 py-1 bg-orange-500 text-white font-light 

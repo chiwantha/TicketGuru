@@ -1,4 +1,9 @@
 import WidthFitter from "@/components/common/layout/widthFitter/WidthFitter";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import Button from "@/components/user/button/button/Button";
 import EventCard from "@/components/user/cards/event/EventCard";
 import Hero from "@/components/user/layout/sections/hero/Hero";
@@ -32,9 +37,9 @@ const Homepage = async () => {
         <Hero />
       </section>
 
-      <section className="relative z-20 mt-[100vh] bg-black overflow-hidden">
+      <section className="relative z-20 mt-[100vh] bg-white overflow-hidden">
         {/* Background Image */}
-        <div className="absolute inset-0 -z-10">
+        {/* <div className="absolute inset-0 -z-10">
           <Image
             src="/assets/crowd.jpg"
             alt="crowd.png"
@@ -44,7 +49,7 @@ const Homepage = async () => {
             priority
           />
           <div className="absolute inset-0 bg-black/70" />
-        </div>
+        </div> */}
 
         {/* Content */}
         <WidthFitter>
@@ -54,7 +59,7 @@ const Homepage = async () => {
               <h2 className="text-4xl font-bold text-orange-500 text-center">
                 VIEW OUR EVENTS
               </h2>
-              <p className="text-white text-center text-xl leading-tight font-light">
+              <p className="text-gray-500 text-center text-xl leading-tight font-light">
                 Find Your Favourite Event And Book Your Tickets Easily
               </p>
             </div>
@@ -70,15 +75,56 @@ const Homepage = async () => {
             </div>
 
             {/* Promo Image */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <div className="relative rounded-lg shadow-md aspect-video overflow-hidden">
-                <Image
-                  src="/ads/promo.png"
-                  alt="promo.png"
-                  className="object-cover object-center"
-                  fill
-                />
-              </div>
+            <div className="grid grid-cols-1">
+              <Carousel
+                className={`rounded-lg overflow-hidden`}
+                slidesToShow={2}
+                autoplayDelay={1000}
+                breakpoints={{ xs: 1, sm: 2 }}
+              >
+                <CarouselContent>
+                  <CarouselItem>
+                    <div className="relative rounded-lg shadow-md aspect-video overflow-hidden">
+                      <Image
+                        src="/ads/boat-party.png"
+                        alt="promo.png"
+                        className="object-cover object-center"
+                        fill
+                      />
+                    </div>
+                  </CarouselItem>
+                  <CarouselItem>
+                    <div className="relative rounded-lg shadow-md aspect-video overflow-hidden">
+                      <Image
+                        src="/ads/promo.png"
+                        alt="promo.png"
+                        className="object-cover object-center"
+                        fill
+                      />
+                    </div>
+                  </CarouselItem>
+                  <CarouselItem>
+                    <div className="relative rounded-lg shadow-md aspect-video overflow-hidden">
+                      <Image
+                        src="/ads/boat-party.png"
+                        alt="promo.png"
+                        className="object-cover object-center"
+                        fill
+                      />
+                    </div>
+                  </CarouselItem>
+                  <CarouselItem>
+                    <div className="relative rounded-lg shadow-md aspect-video overflow-hidden">
+                      <Image
+                        src="/ads/promo.png"
+                        alt="promo.png"
+                        className="object-cover object-center"
+                        fill
+                      />
+                    </div>
+                  </CarouselItem>
+                </CarouselContent>
+              </Carousel>
             </div>
 
             {/* Button */}

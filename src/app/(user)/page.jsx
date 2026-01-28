@@ -1,13 +1,9 @@
 import WidthFitter from "@/components/common/layout/widthFitter/WidthFitter";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+
 import Button from "@/components/user/button/button/Button";
 import EventCard from "@/components/user/cards/event/EventCard";
+import AdsSlider from "@/components/user/layout/sections/ads_slider/AdsSlider";
 import Hero from "@/components/user/layout/sections/hero/Hero";
-import Image from "next/image";
 
 async function get_event_cards() {
   try {
@@ -16,13 +12,13 @@ async function get_event_cards() {
     });
 
     if (!res.ok) {
-      console.error(`Failed to Fetch Event Cards : ${res.status}`);
+      console.log(`Failed to Fetch Event Cards : ${res.status}`);
       return { events: [] };
     }
 
     return await res.json();
   } catch (err) {
-    console.error(`Error Fetching Event Cards : ${err}`);
+    console.log(`Error Fetching Event Cards : ${err}`);
     return { events: [] };
   }
 }
@@ -39,17 +35,21 @@ const Homepage = async () => {
 
       <section className="relative z-20 mt-[100vh] bg-white overflow-hidden">
         {/* Background Image */}
-        {/* <div className="absolute inset-0 -z-10">
-          <Image
-            src="/assets/crowd.jpg"
-            alt="crowd.png"
-            className="object-cover object-center blur-md"
-            fill
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/70" />
-        </div> */}
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background: "#ffffff",
+            backgroundImage: `
+        radial-gradient(
+          circle at top center,
+          rgba(255, 140, 60, 0.1),
+          transparent 70%
+        )
+      `,
+            filter: "blur(80px)",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
 
         {/* Content */}
         <WidthFitter>
@@ -67,6 +67,7 @@ const Homepage = async () => {
             {/* Ticket Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {events &&
+                events.length > 0 &&
                 events
                   ?.slice(0, 4)
                   .map((event, index) => (
@@ -74,58 +75,8 @@ const Homepage = async () => {
                   ))}
             </div>
 
-            {/* Promo Image */}
-            <div className="grid grid-cols-1">
-              <Carousel
-                className={`rounded-lg overflow-hidden`}
-                slidesToShow={2}
-                autoplayDelay={1000}
-                breakpoints={{ xs: 1, sm: 2 }}
-              >
-                <CarouselContent>
-                  <CarouselItem>
-                    <div className="relative rounded-lg shadow-md aspect-video overflow-hidden">
-                      <Image
-                        src="/ads/boat-party.png"
-                        alt="promo.png"
-                        className="object-cover object-center"
-                        fill
-                      />
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="relative rounded-lg shadow-md aspect-video overflow-hidden">
-                      <Image
-                        src="/ads/promo.png"
-                        alt="promo.png"
-                        className="object-cover object-center"
-                        fill
-                      />
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="relative rounded-lg shadow-md aspect-video overflow-hidden">
-                      <Image
-                        src="/ads/boat-party.png"
-                        alt="promo.png"
-                        className="object-cover object-center"
-                        fill
-                      />
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="relative rounded-lg shadow-md aspect-video overflow-hidden">
-                      <Image
-                        src="/ads/promo.png"
-                        alt="promo.png"
-                        className="object-cover object-center"
-                        fill
-                      />
-                    </div>
-                  </CarouselItem>
-                </CarouselContent>
-              </Carousel>
-            </div>
+            {/* ads slider */}
+            <AdsSlider />
 
             {/* Button */}
             <Button

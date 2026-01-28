@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -11,7 +12,9 @@ const CarouselContext = React.createContext(null);
 
 function useCarousel() {
   const context = React.useContext(CarouselContext);
-  if (!context) throw new Error("useCarousel must be used within <Carousel />");
+  if (!context) {
+    throw new Error("useCarousel must be used within <Carousel />");
+  }
   return context;
 }
 
@@ -28,7 +31,7 @@ export function Carousel({
   const autoplayRef = React.useRef(
     Autoplay({
       delay: autoplayDelay,
-      stopOnInteraction: false, // never stop
+      stopOnInteraction: false,
     }),
   );
 
@@ -36,6 +39,7 @@ export function Carousel({
     {
       axis: orientation === "horizontal" ? "x" : "y",
       loop: true,
+      align: "start",
     },
     autoplay ? [autoplayRef.current] : [],
   );
@@ -43,7 +47,6 @@ export function Carousel({
   const scrollPrev = () => api?.scrollPrev();
   const scrollNext = () => api?.scrollNext();
 
-  // Responsive slides
   const [currentSlides, setCurrentSlides] = React.useState(slidesToShow);
 
   React.useEffect(() => {
@@ -51,6 +54,7 @@ export function Carousel({
 
     const handleResize = () => {
       const width = window.innerWidth;
+
       if (width >= 1024 && breakpoints.lg) setCurrentSlides(breakpoints.lg);
       else if (width >= 768 && breakpoints.md) setCurrentSlides(breakpoints.md);
       else if (width >= 640 && breakpoints.sm) setCurrentSlides(breakpoints.sm);
@@ -58,7 +62,7 @@ export function Carousel({
       else setCurrentSlides(slidesToShow);
     };
 
-    handleResize(); // initial
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [breakpoints, slidesToShow]);
@@ -88,8 +92,7 @@ export function CarouselContent({ className, ...props }) {
     <div ref={carouselRef} className="overflow-hidden">
       <div
         className={cn(
-          "flex",
-          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
+          orientation === "horizontal" ? "flex gap-6" : "flex flex-col gap-6",
           className,
         )}
         {...props}
@@ -99,18 +102,23 @@ export function CarouselContent({ className, ...props }) {
 }
 
 export function CarouselItem({ className, ...props }) {
-  const { orientation, slidesToShow } = useCarousel();
+  const { slidesToShow } = useCarousel();
+
+  /**
+   * gap-6 = 24px
+   * total gaps = slidesToShow - 1
+   */
+  const GAP = 24;
+  const totalGap = GAP * (slidesToShow - 1);
 
   return (
     <div
       role="group"
       aria-roledescription="slide"
-      style={{ flex: `0 0 ${100 / slidesToShow}%` }}
-      className={cn(
-        "min-w-0 shrink-0 grow-0",
-        orientation === "horizontal" ? "pl-4" : "pt-4",
-        className,
-      )}
+      style={{
+        flex: `0 0 calc((100% - ${totalGap}px) / ${slidesToShow})`,
+      }}
+      className={cn("min-w-0 shrink-0", className)}
       {...props}
     />
   );
@@ -123,7 +131,7 @@ export function CarouselPrevious({ className, ...props }) {
     <Button
       onClick={scrollPrev}
       className={cn(
-        "absolute size-8 rounded-full",
+        "absolute z-10 size-8 rounded-full",
         orientation === "horizontal"
           ? "top-1/2 -left-12 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -143,7 +151,7 @@ export function CarouselNext({ className, ...props }) {
     <Button
       onClick={scrollNext}
       className={cn(
-        "absolute size-8 rounded-full",
+        "absolute z-10 size-8 rounded-full",
         orientation === "horizontal"
           ? "top-1/2 -right-12 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",

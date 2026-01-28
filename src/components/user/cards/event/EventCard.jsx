@@ -76,7 +76,7 @@ const EventCard = ({ event = {} }) => {
   return (
     <article
       className="relative rounded-lg shadow-md hover:shadow-lg transition-all duration-300
-      overflow-hidden hover:scale-105 "
+      overflow-hidden sm:hover:scale-105 "
       itemScope
       itemType="https://schema.org/Event"
     >

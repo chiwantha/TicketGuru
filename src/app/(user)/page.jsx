@@ -42,7 +42,7 @@ const Homepage = async () => {
             backgroundImage: `
         radial-gradient(
           circle at top center,
-          rgba(255, 140, 60, 0.1),
+          rgba(255, 140, 60, 0.15),
           transparent 70%
         )
       `,
@@ -64,8 +64,8 @@ const Homepage = async () => {
               </p>
             </div>
 
-            {/* Ticket Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {/* Event Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {events &&
                 events.length > 0 &&
                 events

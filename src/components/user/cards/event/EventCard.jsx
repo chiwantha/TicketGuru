@@ -76,7 +76,7 @@ const EventCard = ({ event = {} }) => {
   return (
     <article
       className="relative rounded-lg shadow-md hover:shadow-lg transition-all duration-300
-      overflow-hidden sm:hover:scale-105 "
+      overflow-hidden bg-white"
       itemScope
       itemType="https://schema.org/Event"
     >
@@ -129,7 +129,7 @@ const EventCard = ({ event = {} }) => {
       </div>
 
       {/* -------- Event Content -------- */}
-      <div className="p-4 flex-col flex space-y-2 bg-white">
+      <div className="p-4 flex-col flex space-y-2 ">
         <h3
           className="font-bold text-gray-600 text-xl uppercase line-clamp-1 text-ellipsis"
           itemProp="name"

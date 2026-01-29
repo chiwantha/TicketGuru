@@ -4,7 +4,6 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import Image from "next/image";
-import Link from "next/link";
 
 async function get_Ads() {
   try {
@@ -32,7 +31,7 @@ const AdsSlider = async () => {
       <Carousel
         className={`rounded-lg overflow-hidden`}
         slidesToShow={2}
-        autoplayDelay={1000}
+        autoplayDelay={5000}
         breakpoints={{ xs: 1, sm: 2 }}
       >
         <CarouselContent>
@@ -40,12 +39,12 @@ const AdsSlider = async () => {
             ads.map((ad, index) => (
               <CarouselItem
                 key={index}
-                className="relative  rounded-lg shadow-md aspect-video overflow-hidden"
+                className="relative rounded-lg shadow-md aspect-video overflow-hidden"
               >
                 <Image
-                  src={"/ads/boat-party-2026.png"}
+                  src={`/ads/${ad.image}`}
                   alt={`/ads/${ad.image}` || "/ads/boat-party-2026.png"}
-                  className="object-cover object-center"
+                  className="object-cover object-center bg-gray-200"
                   fill
                 />
               </CarouselItem>

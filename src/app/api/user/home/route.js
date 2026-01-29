@@ -15,7 +15,7 @@ export const GET = async (request) => {
     events.card_description
      FROM events
      INNER JOIN mst_category ON events.category_id = mst_category.id
-     WHERE events.state = 1 ORDER BY events.created_at DESC LIMIT 8 ;`;
+     WHERE events.state = 1 ORDER BY events.date ASC LIMIT 8 ;`;
     const events = await query(sql);
 
     if (!events) {

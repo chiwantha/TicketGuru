@@ -21,8 +21,7 @@ function useCarousel() {
 export function Carousel({
   orientation = "horizontal",
   slidesToShow = 1,
-  autoplay = false,
-  autoplayDelay = 4000,
+  autoplayDelay = 3500,
   breakpoints,
   className,
   children,
@@ -32,6 +31,8 @@ export function Carousel({
     Autoplay({
       delay: autoplayDelay,
       stopOnInteraction: false,
+      stopOnMouseEnter: false,
+      stopOnFocusIn: false,
     }),
   );
 
@@ -40,8 +41,9 @@ export function Carousel({
       axis: orientation === "horizontal" ? "x" : "y",
       loop: true,
       align: "start",
+      dragFree: false,
     },
-    autoplay ? [autoplayRef.current] : [],
+    [autoplayRef.current],
   );
 
   const scrollPrev = () => api?.scrollPrev();
@@ -92,7 +94,7 @@ export function CarouselContent({ className, ...props }) {
     <div ref={carouselRef} className="overflow-hidden">
       <div
         className={cn(
-          orientation === "horizontal" ? "flex gap-6" : "flex flex-col gap-6",
+          orientation === "horizontal" ? "flex gap-4" : "flex flex-col gap-4",
           className,
         )}
         {...props}
@@ -104,11 +106,7 @@ export function CarouselContent({ className, ...props }) {
 export function CarouselItem({ className, ...props }) {
   const { slidesToShow } = useCarousel();
 
-  /**
-   * gap-6 = 24px
-   * total gaps = slidesToShow - 1
-   */
-  const GAP = 24;
+  const GAP = 16; // gap-4
   const totalGap = GAP * (slidesToShow - 1);
 
   return (
@@ -124,6 +122,7 @@ export function CarouselItem({ className, ...props }) {
   );
 }
 
+/* Optional arrows – autoplay will keep running even if clicked */
 export function CarouselPrevious({ className, ...props }) {
   const { orientation, scrollPrev } = useCarousel();
 

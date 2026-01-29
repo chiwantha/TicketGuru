@@ -14,6 +14,7 @@ const EventCard = ({ event = {} }) => {
     face_img,
     card_description,
     slug,
+    sale,
   } = event;
 
   /* ---------- Time formatting ---------- */
@@ -112,8 +113,8 @@ const EventCard = ({ event = {} }) => {
       <div className="relative aspect-square top-0">
         {/* Category */}
         <div
-          className="absolute z-40 bottom-4 right-4 px-4 py-1 bg-orange-500 text-white font-light 
-          uppercase rounded-lg text-sm shadow-sm"
+          className="absolute z-40 bottom-4 right-4 px-4 py-1 bg-orange-500 text-white font-medium 
+          uppercase rounded-lg text-sm shadow-md"
         >
           {category}
         </div>
@@ -138,17 +139,20 @@ const EventCard = ({ event = {} }) => {
         </h3>
 
         <div className="flex flex-col uppercase -space-y-1.5 text-orange-500">
-          <span className="font-medium">
+          <span className="font-bold">
             {start ? `${start} - ${end || "ONWARDS"}` : "00:00 - 00:00"}
           </span>
 
-          <address className="font-light not-italic" itemProp="location">
+          <address
+            className="font-normal not-italic line-clamp-1 text-ellipsis"
+            itemProp="location"
+          >
             {venue}
           </address>
         </div>
 
         <p
-          className="text-[#848484] tracking-normal leading-5 font-light line-clamp-3 text-ellipsis"
+          className="text-[#646464] tracking-normal leading-5 font-light line-clamp-3 text-ellipsis"
           itemProp="description"
         >
           {card_description ||
@@ -157,9 +161,12 @@ const EventCard = ({ event = {} }) => {
 
         <Button
           wfull={true}
-          title="Book Now"
+          title={
+            sale == 1 ? `Buy Tickets` : sale == 2 ? `Coming Soon` : `Sold Out`
+          }
           link={`/event/${slug}`}
           margins="mt-3"
+          disabled={sale == 2 || sale == 0}
         />
       </div>
     </article>

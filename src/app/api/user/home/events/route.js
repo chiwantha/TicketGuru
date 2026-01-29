@@ -12,7 +12,8 @@ export const GET = async (request) => {
     events.venue,
     events.date,
     events.face_img,
-    events.card_description
+    events.card_description,
+    events.sale
      FROM events
      INNER JOIN mst_category ON events.category_id = mst_category.id
      WHERE events.state = 1 ORDER BY events.date ASC LIMIT 8 ;`;

@@ -7,9 +7,12 @@ import Hero from "@/components/user/layout/sections/hero/Hero";
 
 async function get_event_cards() {
   try {
-    const res = await fetch(`${process.env.NEXT_BASE_URL}/api/user/home`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_BASE_URL}/api/user/home/events`,
+      {
+        cache: "no-store",
+      },
+    );
 
     if (!res.ok) {
       console.log(`Failed to Fetch Event Cards : ${res.status}`);
@@ -39,13 +42,7 @@ const Homepage = async () => {
           className="absolute inset-0 -z-10"
           style={{
             background: "#ffffff",
-            backgroundImage: `
-        radial-gradient(
-          circle at top center,
-          rgba(255, 140, 60, 0.15),
-          transparent 70%
-        )
-      `,
+            backgroundImage: ` radial-gradient(circle at top center,rgba(150, 140, 60, 0.15),transparent 70%)`,
             filter: "blur(80px)",
             backgroundRepeat: "no-repeat",
           }}
@@ -55,9 +52,9 @@ const Homepage = async () => {
         <WidthFitter>
           <div className="py-12 md:py-20 flex justify-center w-full flex-col space-y-6">
             {/* Header */}
-            <div className="-space-y-1 -mt-2">
+            <div className=" -mt-2">
               <h2 className="text-4xl font-bold text-orange-500 text-center">
-                VIEW OUR EVENTS
+                VIEW LATEST EVENTS
               </h2>
               <p className="text-gray-500 text-center text-xl leading-tight font-light">
                 Find Your Favourite Event And Book Your Tickets Easily
@@ -65,7 +62,7 @@ const Homepage = async () => {
             </div>
 
             {/* Event Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
               {events &&
                 events.length > 0 &&
                 events
@@ -88,6 +85,8 @@ const Homepage = async () => {
           </div>
         </WidthFitter>
       </section>
+
+      <div className=""></div>
     </main>
   );
 };

@@ -1,34 +1,13 @@
 import WidthFitter from "@/components/common/layout/widthFitter/WidthFitter";
+import Skeleton from "@/components/common/skeleton/Skeleton";
 
 import Button from "@/components/user/button/button/Button";
-import EventCard from "@/components/user/cards/event/EventCard";
 import AdsSlider from "@/components/user/layout/sections/ads_slider/AdsSlider";
+import EventGrid from "@/components/user/layout/sections/event_grid/EventGrid";
 import Hero from "@/components/user/layout/sections/hero/Hero";
-
-async function get_event_cards() {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_BASE_URL}/api/user/home/events`,
-      {
-        cache: "no-store",
-      },
-    );
-
-    if (!res.ok) {
-      console.log(`Failed to Fetch Event Cards : ${res.status}`);
-      return { events: [] };
-    }
-
-    return await res.json();
-  } catch (err) {
-    console.log(`Error Fetching Event Cards : ${err}`);
-    return { events: [] };
-  }
-}
+import { Suspense } from "react";
 
 const Homepage = async () => {
-  const events = await get_event_cards();
-
   return (
     <main className="relative">
       {/* HERO (fixed background layer) */}
@@ -42,7 +21,7 @@ const Homepage = async () => {
           className="absolute inset-0 -z-10"
           style={{
             background: "#ffffff",
-            backgroundImage: ` radial-gradient(circle at top center,rgba(150, 140, 60, 0.15),transparent 70%)`,
+            backgroundImage: ` radial-gradient(circle at top center,rgba(255, 140, 60, 0.15),transparent 70%)`,
             filter: "blur(80px)",
             backgroundRepeat: "no-repeat",
           }}
@@ -61,16 +40,18 @@ const Homepage = async () => {
               </p>
             </div>
 
-            {/* Event Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
-              {events &&
-                events.length > 0 &&
-                events
-                  ?.slice(0, 4)
-                  .map((event, index) => (
-                    <EventCard key={index} event={event} />
-                  ))}
-            </div>
+            <Suspense
+              fallback={
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+                  <Skeleton skfor={`event_card`} />
+                  <Skeleton skfor={`event_card`} />
+                  <Skeleton skfor={`event_card`} />
+                  <Skeleton skfor={`event_card`} />
+                </div>
+              }
+            >
+              <EventGrid />
+            </Suspense>
 
             {/* ads slider */}
             <AdsSlider />

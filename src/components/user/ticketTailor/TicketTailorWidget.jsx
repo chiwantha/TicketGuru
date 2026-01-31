@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Button from "../button/button/Button";
 import { ticket_btn_ui } from "@/constant/styles";
 
-const TicketModal = ({ tt_id }) => {
+const TicketModal = ({ tt_id, chekout_hash }) => {
   const [isOpen, setIsOpen] = useState(false);
   const widgetRef = useRef(null);
 
@@ -12,7 +12,7 @@ const TicketModal = ({ tt_id }) => {
 
   // Build the Ticket Tailor checkout URL
   const ticketUrl = hasTicket
-    ? `https://www.tickettailor.com/checkout/new-session/id/${tt_id}/chk/54e7/?ref=dsa&show_search_filter=true&show_date_filter=true&show_sort=true`
+    ? `https://www.tickettailor.com/checkout/new-session/id/${tt_id}/chk/${chekout_hash}/?ref=dsa&show_search_filter=true&show_date_filter=true&show_sort=true`
     : null;
 
   useEffect(() => {

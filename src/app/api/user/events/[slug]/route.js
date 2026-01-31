@@ -5,7 +5,26 @@ export const GET = async (request, { params }) => {
   try {
     const { slug } = await params;
 
-    const sql = `SELECT * FROM events WHERE slug=?`;
+    const sql = `SELECT 
+    ticket_tailor_link.tt_id,
+    ticket_tailor_link.checkout_hash,
+    events.name,
+    mst_category.category,
+    events.card_description,
+    events.description, 
+    events.date, 
+    events.start_time, 
+    events.end_time,
+    events.venue,
+    events.postal_code,
+    events.country,
+    events.face_img,
+    events.banner_img,
+    events.sale
+     FROM events
+     INNER JOIN mst_category ON mst_category.id = events.category_id
+     INNER JOIN ticket_tailor_link ON ticket_tailor_link.event_id = events.id
+     WHERE events.slug=?`;
 
     const event = await query(sql, [slug]);
 

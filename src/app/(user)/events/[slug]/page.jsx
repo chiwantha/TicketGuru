@@ -34,9 +34,13 @@ const EventShowPage = async ({ params }) => {
   return (
     <div className="flex flex-col">
       {/* Event banner */}
-      <div className="relative w-full h-100">
+      <div className="relative w-full h-100 bg-orange-100">
         <Image
-          src="/event/banner/boart-party.png"
+          src={
+            event.banner_img
+              ? `/event/banner/${event.banner_img}`
+              : `/event/banner/default.png`
+          }
           alt="Event banner"
           fill
           className="object-cover object-center"
@@ -47,9 +51,9 @@ const EventShowPage = async ({ params }) => {
 
       <WidthFitter>
         <div className="">
-          <div className="grid grid-cols-1 md:grid-cols-3 py-6  gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 py-6 gap-4 md:gap-6">
             {/* EVENT CONTENT */}
-            <div className="sm:col-span-2 flex flex-col space-y-6 order-2 md:order-1">
+            <div className="sm:col-span-2 flex flex-col space-y-6 order-2 md:order-1 ">
               <div>
                 <span className="uppercase font-medium  sm:text-lg text-orange-500">
                   Ticketguru Proudly Presents
@@ -83,16 +87,23 @@ const EventShowPage = async ({ params }) => {
             </div>
 
             {/* EVENT IMAGE */}
-            <div className="rounded-xl -mt-56 space-y-4 md:space-y-6 order-1 md:order-2">
+            <div className=" rounded-xl -mt-56 space-y-4 md:space-y-6 order-1 md:order-2">
               <div className="relative w-full aspect-square rounded-xl overflow-hidden shadow-lg">
                 <Image
-                  src="/event/face/boat_party.png"
+                  src={
+                    event.face_img
+                      ? `/event/face/${event.face_img}`
+                      : `/event/face/default.png`
+                  }
                   alt="Event poster"
                   fill
                   className="object-contain"
                 />
               </div>
-              <TicketModal tt_id={event.tt_id} />
+              <TicketModal
+                tt_id={event.tt_id}
+                chekout_hash={event.checkout_hash}
+              />
             </div>
           </div>
           <EventMap postalCode={event.postal_code} />

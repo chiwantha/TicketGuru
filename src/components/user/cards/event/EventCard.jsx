@@ -77,7 +77,7 @@ const EventCard = ({ event = {} }) => {
   return (
     <article
       className="relative rounded-lg shadow-lg hover:shadow-lg transition-all duration-300
-      overflow-hidden bg-white border border-gray-200"
+      overflow-hidden bg-white border border-gray-300"
       itemScope
       itemType="https://schema.org/Event"
     >
@@ -138,7 +138,7 @@ const EventCard = ({ event = {} }) => {
           {name}
         </h3>
 
-        <div className="flex flex-col uppercase -space-y-1.5 text-orange-500">
+        <div className="flex flex-col uppercase -space-y-1.5 text-orange-500 -mt-1">
           <span className="font-bold text-lg">
             {start ? `${start} - ${end || "ONWARDS"}` : "00:00 - 00:00"}
           </span>
@@ -152,7 +152,7 @@ const EventCard = ({ event = {} }) => {
         </div>
 
         <p
-          className="text-[#646464] tracking-normal leading-5 font-normal text-lg line-clamp-3 text-ellipsis"
+          className="text-[#646464] tracking-normal leading-5 font-light uppercase text-sm line-clamp-3 text-ellipsis"
           itemProp="description"
         >
           {card_description ||
@@ -164,8 +164,8 @@ const EventCard = ({ event = {} }) => {
           title={
             sale == 1 ? `Buy Tickets` : sale == 2 ? `Coming Soon` : `Sold Out`
           }
-          link={`/event/${slug}`}
-          margins="mt-3"
+          link={`/events/${slug}`}
+          margins="mt-2"
           disabled={sale == 2 || sale == 0}
         />
       </div>

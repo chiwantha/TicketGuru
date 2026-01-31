@@ -31,7 +31,7 @@ const Homepage = async () => {
 
         {/* Content */}
         <WidthFitter>
-          <div className="py-12 md:py-20 flex justify-center w-full flex-col space-y-6">
+          <div className="pt-12 md:pt-20 flex justify-center w-full flex-col space-y-6">
             {/* Header */}
             <div className=" -mt-2">
               <h2 className="text-4xl font-bold text-orange-500 text-center">

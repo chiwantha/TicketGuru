@@ -1,3 +1,4 @@
+import Skeleton from "@/components/common/skeleton/Skeleton";
 import EventCard from "@/components/user/cards/event/EventCard";
 
 async function get_event_cards() {
@@ -23,13 +24,20 @@ const EventGrid = async () => {
   const events = await get_event_cards();
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6">
-      {events &&
-        events.length > 0 &&
+      {events && events.length > 0 ? (
         events
           ?.slice(0, 4)
           .map((event, index) => (
             <EventCard key={event.id ?? index} event={event} />
-          ))}
+          ))
+      ) : (
+        <>
+          <Skeleton skfor={`event_card`} />
+          <Skeleton skfor={`event_card`} />
+          <Skeleton skfor={`event_card`} />
+          <Skeleton skfor={`event_card`} />
+        </>
+      )}
     </div>
   );
 };

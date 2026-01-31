@@ -12,13 +12,13 @@ async function get_Ads() {
     });
 
     if (!res.ok) {
-      console.error(`Failed to Fetch Ads : ${res.status}`);
+      console.log(`Failed to Fetch Ads : ${res.status}`);
       return { ads: [] };
     }
 
     return await res.json();
   } catch (err) {
-    console.error(`Error Fetching Ads : ${err}`);
+    console.log(`Error Fetching Ads : ${err}`);
     return { ads: [] };
   }
 }

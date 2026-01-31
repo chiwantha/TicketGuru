@@ -5,9 +5,59 @@ import React from "react";
 
 const Newsletter = () => {
   return (
-    <div className="bg-orange-600 py-12 md:py-20">
+    <div className="relative py-12 md:py-20">
+      {/* Orange Dashed Grid Overlay */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #f97316 1px, transparent 1px),
+            linear-gradient(to bottom, #f97316 1px, transparent 1px)
+          `,
+          backgroundSize: "20px 20px",
+          backgroundPosition: "0 0, 0 0",
+          maskImage: `
+            repeating-linear-gradient(
+              to right,
+              black 0px,
+              black 3px,
+              transparent 3px,
+              transparent 8px
+            ),
+            repeating-linear-gradient(
+              to bottom,
+              black 0px,
+              black 3px,
+              transparent 3px,
+              transparent 8px
+            ),
+            radial-gradient(ellipse 70% 60% at 50% 100%, black 60%, transparent 100%)
+          `,
+          WebkitMaskImage: `
+            repeating-linear-gradient(
+              to right,
+              black 0px,
+              black 3px,
+              transparent 3px,
+              transparent 8px
+            ),
+            repeating-linear-gradient(
+              to bottom,
+              black 0px,
+              black 3px,
+              transparent 3px,
+              transparent 8px
+            ),
+            radial-gradient(ellipse 70% 60% at 50% 100%, black 60%, transparent 100%)
+          `,
+          maskComposite: "intersect",
+          WebkitMaskComposite: "source-in",
+          opacity: 0.3,
+        }}
+      />
+
       <WidthFitter>
-        <div className="relative mx-auto ">
+        <div className="relative mx-auto">
           {/* Ticket Card */}
           <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden">
             {/* Perforation top */}

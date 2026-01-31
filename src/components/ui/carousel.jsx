@@ -41,7 +41,6 @@ export function Carousel({
       axis: orientation === "horizontal" ? "x" : "y",
       loop: true,
       align: "start",
-      dragFree: false,
     },
     [autoplayRef.current],
   );
@@ -50,6 +49,7 @@ export function Carousel({
   const scrollNext = () => api?.scrollNext();
 
   const [currentSlides, setCurrentSlides] = React.useState(slidesToShow);
+  const [gap, setGap] = React.useState(16); // default gap-4
 
   React.useEffect(() => {
     if (!breakpoints) return;
@@ -57,11 +57,15 @@ export function Carousel({
     const handleResize = () => {
       const width = window.innerWidth;
 
+      // slides per view
       if (width >= 1024 && breakpoints.lg) setCurrentSlides(breakpoints.lg);
       else if (width >= 768 && breakpoints.md) setCurrentSlides(breakpoints.md);
       else if (width >= 640 && breakpoints.sm) setCurrentSlides(breakpoints.sm);
       else if (breakpoints.xs) setCurrentSlides(breakpoints.xs);
       else setCurrentSlides(slidesToShow);
+
+      // responsive gap
+      setGap(width >= 640 ? 24 : 16); // sm:gap-6
     };
 
     handleResize();
@@ -76,6 +80,7 @@ export function Carousel({
         api,
         orientation,
         slidesToShow: currentSlides,
+        gap,
         scrollPrev,
         scrollNext,
       }}
@@ -94,7 +99,9 @@ export function CarouselContent({ className, ...props }) {
     <div ref={carouselRef} className="overflow-hidden">
       <div
         className={cn(
-          orientation === "horizontal" ? "flex gap-4" : "flex flex-col gap-4",
+          orientation === "horizontal"
+            ? "flex gap-4 sm:gap-6"
+            : "flex flex-col gap-4 sm:gap-6",
           className,
         )}
         {...props}
@@ -104,10 +111,9 @@ export function CarouselContent({ className, ...props }) {
 }
 
 export function CarouselItem({ className, ...props }) {
-  const { slidesToShow } = useCarousel();
+  const { slidesToShow, gap } = useCarousel();
 
-  const GAP = 16; // gap-4
-  const totalGap = GAP * (slidesToShow - 1);
+  const totalGap = gap * (slidesToShow - 1);
 
   return (
     <div
@@ -116,13 +122,16 @@ export function CarouselItem({ className, ...props }) {
       style={{
         flex: `0 0 calc((100% - ${totalGap}px) / ${slidesToShow})`,
       }}
-      className={cn("min-w-0 shrink-0", className)}
+      className={cn(
+        "min-w-0 shrink-0 rounded-lg shadow-md bg-background",
+        className,
+      )}
       {...props}
     />
   );
 }
 
-/* Optional arrows – autoplay will keep running even if clicked */
+/* arrows optional */
 export function CarouselPrevious({ className, ...props }) {
   const { orientation, scrollPrev } = useCarousel();
 

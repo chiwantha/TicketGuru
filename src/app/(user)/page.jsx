@@ -7,15 +7,17 @@ import EventGrid from "@/components/user/layout/sections/event_grid/EventGrid";
 import Hero from "@/components/user/layout/sections/hero/Hero";
 import { Suspense } from "react";
 
+const forced_dynamic = 0;
+
 const Homepage = async () => {
   return (
-    <main className="relative">
+    <main className="">
       {/* HERO (fixed background layer) */}
-      <section className="fixed inset-0 z-10">
+      <section className="">
         <Hero />
       </section>
 
-      <section className="relative z-20 mt-[100vh] bg-white overflow-hidden">
+      <section className=" bg-white overflow-hidden">
         {/* Background Image */}
         <div
           className="absolute inset-0 -z-10"

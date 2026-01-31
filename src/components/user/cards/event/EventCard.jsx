@@ -76,8 +76,8 @@ const EventCard = ({ event = {} }) => {
 
   return (
     <article
-      className="relative rounded-lg shadow-md hover:shadow-lg transition-all duration-300
-      overflow-hidden bg-white"
+      className="relative rounded-lg shadow-lg hover:shadow-lg transition-all duration-300
+      overflow-hidden bg-white border border-gray-200"
       itemScope
       itemType="https://schema.org/Event"
     >
@@ -130,7 +130,7 @@ const EventCard = ({ event = {} }) => {
       </div>
 
       {/* -------- Event Content -------- */}
-      <div className="p-4 flex-col flex space-y-2 ">
+      <div className="p-4 flex-col flex space-y-3 ">
         <h3
           className="font-bold text-gray-600 text-xl uppercase line-clamp-1 text-ellipsis"
           itemProp="name"
@@ -139,7 +139,7 @@ const EventCard = ({ event = {} }) => {
         </h3>
 
         <div className="flex flex-col uppercase -space-y-1.5 text-orange-500">
-          <span className="font-bold">
+          <span className="font-bold text-lg">
             {start ? `${start} - ${end || "ONWARDS"}` : "00:00 - 00:00"}
           </span>
 
@@ -152,7 +152,7 @@ const EventCard = ({ event = {} }) => {
         </div>
 
         <p
-          className="text-[#646464] tracking-normal leading-5 font-light line-clamp-3 text-ellipsis"
+          className="text-[#646464] tracking-normal leading-5 font-normal text-lg line-clamp-3 text-ellipsis"
           itemProp="description"
         >
           {card_description ||

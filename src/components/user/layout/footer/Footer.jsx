@@ -61,10 +61,13 @@ const Footer = () => {
         </WidthFitter>
       </div>
       {/* middle strip */}
-      <div className=" bg-orange-600 ">
+      <div className=" bg-linear-to-b sm:bg-linear-to-r from-orange-600 via-orange-500 to-orange-600 ">
         <WidthFitter>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 border-t border-t-orange-700 py-12 items-center">
-            <div className="bg-white rounded-lg grid-cols-1 sm:col-span-2 shadow-md p-6 flex flex-col items-center justify-center space-y-4">
+            <div
+              className="bg-white rounded-lg grid-cols-1 sm:col-span-2 shadow-md p-6 flex flex-col items-center justify-center space-y-4
+            hover:scale-105 transition-transform duration-300"
+            >
               <div className="relative aspect-video w-[60%] sm:w-[40%]">
                 <Image
                   src={`/logo/LogoDark.png`}
@@ -82,7 +85,7 @@ const Footer = () => {
               <div className="grid grid-cols-4 w-full gap-2">
                 {social.map((so, index) => (
                   <div
-                    className="flex items-center justify-center text-2xl text-orange-500 hover:scale-105 transition-transform duration-300"
+                    className="flex items-center justify-center text-2xl text-orange-500 hover:scale-125 transition-transform duration-300"
                     aria-label={so.media}
                     key={index}
                   >
@@ -93,12 +96,12 @@ const Footer = () => {
             </div>
 
             {/* web links */}
-            <div className="flex-col flex items-end space-y-2 lg:border-r border-white lg:pr-6">
+            <div className="flex-col flex items-end space-y-2 lg:border-r border-white/30 lg:pr-6">
               <h2 className="text-orange-100 text-4xl font-bold">WEB LINKS</h2>
-              <div className="flex-col flex items-end space-y-1">
+              <div className="flex-col flex items-end ">
                 {links.map((link, index) => (
                   <Link href={link.path} key={index}>
-                    <span className="md:text-xl font-medium hover:font-bold transition-all duration-300 text-white ">
+                    <span className="md:text-xl  hover:font-bold transition-all duration-300 text-white ">
                       {link.title} -
                     </span>
                   </Link>
@@ -109,10 +112,10 @@ const Footer = () => {
             {/* contact links */}
             <div className="flex-col flex items-start space-y-2">
               <h2 className="text-orange-100 text-4xl font-bold">CONTACT US</h2>
-              <div className="flex-col flex items-start space-y-1">
+              <div className="flex-col flex items-start">
                 {contact.map((con, index) => (
                   <span
-                    className="md:text-xl font-medium hover:font-bold transition-all duration-300 text-white "
+                    className="md:text-xl hover:font-bold transition-all duration-300 text-white "
                     key={index}
                   >
                     - {con.value}
@@ -124,7 +127,7 @@ const Footer = () => {
         </WidthFitter>
       </div>
       {/* bottom strip */}
-      <div className="py-4 text-center flex flex-col  text-muted-foreground bg-orange-800 text-white">
+      <div className="py-4 text-center flex flex-col  text-muted-foreground bg-orange-600 text-white">
         <span>© 2026. All Rights Reserved.</span>
         <span>
           Designed & Developed by{" "}

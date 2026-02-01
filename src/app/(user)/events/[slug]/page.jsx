@@ -46,7 +46,7 @@ const EventShowPage = async ({ params }) => {
           className="object-cover object-center"
           priority
         />
-        <div className="absolute inset-0 bg-black/50" />
+        {event.banner_img && <div className="absolute inset-0 bg-black/50" />}
       </div>
 
       <WidthFitter>
@@ -89,7 +89,7 @@ const EventShowPage = async ({ params }) => {
             </div>
 
             {/* EVENT IMAGE */}
-            <div className=" -mt-56 space-y-4 md:space-y-6 order-1 md:order-2 bg-red-700 mb-4">
+            <div className=" -mt-56 space-y-4 md:space-y-6 order-1 md:order-2 mb-4">
               <div className="relative w-full aspect-square rounded-xl overflow-hidden shadow-lg">
                 <Image
                   src={

@@ -40,7 +40,7 @@ const contact = [
 
 const Footer = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" id="footer">
       {/* top strip */}
       <div className="border-t-2 border-orange-600 py-12 bg-white">
         <WidthFitter>

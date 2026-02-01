@@ -15,23 +15,33 @@ const Hero = () => {
         className="absolute inset-0 z-0"
         autoplayDelay={5000}
         slidesToShow={1}
+        fade={true}
       >
         <CarouselContent>
           <CarouselItem className="relative w-full h-screen">
             <Image
-              src="/hero/background_london.png"
+              src="/hero/hero1.png"
               alt="background"
               fill
               priority
               className="object-cover object-center blur-sm"
             />
           </CarouselItem>
-
           <CarouselItem className="relative w-full h-screen">
             <Image
-              src="/hero/background.webp"
-              alt="background 2"
+              src="/hero/hero2.png"
+              alt="background"
               fill
+              priority
+              className="object-cover object-center blur-sm"
+            />
+          </CarouselItem>
+          <CarouselItem className="relative w-full h-screen">
+            <Image
+              src="/hero/hero3.png"
+              alt="background"
+              fill
+              priority
               className="object-cover object-center blur-sm"
             />
           </CarouselItem>
@@ -53,7 +63,7 @@ const Hero = () => {
 
         <p
           className="text-white text-lg sm:text-xl md:text-[22px] lg:text-[23px] xl:text-[24px] 2xl:text-[25px] w-85 sm:w-125 md:w-150 lg:w-192.5 text-center
-         leading-tight font-light xl:-mt-2"
+         leading-tight font-light xl:-mt-2 text-shadow-md"
         >
           Book your favorite event tickets with ease. Discover concerts,
           festivals, and exclusive experiences all in one place, with a fast,

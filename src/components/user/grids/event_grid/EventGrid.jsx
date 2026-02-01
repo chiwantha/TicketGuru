@@ -1,11 +1,11 @@
 import Skeleton from "@/components/common/skeleton/Skeleton";
 import EventCard from "@/components/user/cards/event/EventCard";
 
-async function get_event_cards() {
+async function get_event_cards(limit) {
   try {
     // await new Promise((resolve) => setTimeout(resolve, 2000));
     const res = await fetch(
-      `${process.env.NEXT_BASE_URL}/api/user/events?limit=8`,
+      `${process.env.NEXT_BASE_URL}/api/user/events?limit=${limit || 4}`,
       {
         cache: "no-store",
       },
@@ -23,16 +23,14 @@ async function get_event_cards() {
   }
 }
 
-const EventGrid = async () => {
-  const events = await get_event_cards();
+const EventGrid = async ({ cards }) => {
+  const events = await get_event_cards(cards);
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 lg:gap-6">
       {events && events.length > 0 ? (
-        events
-          ?.slice(0, 4)
-          .map((event, index) => (
-            <EventCard key={event.id ?? index} event={event} />
-          ))
+        events.map((event, index) => (
+          <EventCard key={event.id ?? index} event={event} />
+        ))
       ) : (
         <>
           <Skeleton skfor={`event_card`} />

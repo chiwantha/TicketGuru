@@ -9,6 +9,7 @@ async function get_event(slug) {
   try {
     const res = await fetch(
       `${process.env.NEXT_BASE_URL}/api/user/events/${slug}`,
+      { next: { revalidate: 60 } },
     );
 
     if (!res.ok) {
@@ -34,24 +35,34 @@ const EventShowPage = async ({ params }) => {
   return (
     <div className="flex flex-col">
       {/* Event banner */}
-      <div className="relative w-full h-100 bg-orange-100">
-        <Image
-          src={
-            event.banner_img
-              ? `/event/banner/${event.banner_img}`
-              : `/event/banner/default.png`
-          }
-          alt="Event banner"
-          fill
-          className="object-cover object-center"
-          priority
-        />
-        {event.banner_img && <div className="absolute inset-0 bg-black/50" />}
+      <div className="relative w-full h-100 bg-black">
+        {event.banner_img ? (
+          <Image
+            src={`/event/banner/${event.banner_img}`}
+            alt="Event banner"
+            fill
+            className="object-cover object-center"
+          />
+        ) : (
+          <div className="absolute inset-0 overflow-hidden">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `url(/event/face/${event.face_img})`,
+                backgroundRepeat: "repeat",
+                backgroundSize: "150px", // tile size
+              }}
+            />
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/50" />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
       <WidthFitter>
         <div className="">
-          <div className="grid grid-cols-1 md:grid-cols-3 py-6  md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 py-6 md:gap-6">
             {/* EVENT CONTENT */}
             <div className="sm:col-span-2 flex flex-col space-y-6 order-2 md:order-1 ">
               <div>
@@ -64,11 +75,11 @@ const EventShowPage = async ({ params }) => {
                 </h2>
 
                 <div className="flex flex-col sm:flex-row sm:gap-2 -space-y-2">
-                  <span className=" text-orange-700 text-lg uppercase font-bold">
+                  <span className=" text-orange-500 text-lg uppercase font-bold">
                     <span className=" text-gray-600  text-lg mr-2">ON</span>
                     {event.date?.split("T")[0]}
                   </span>
-                  <span className=" text-orange-700 text-lg uppercase font-bold">
+                  <span className=" text-orange-500 text-lg uppercase font-bold">
                     <span className=" text-gray-600  text-lg mr-2">FROM</span>
                     {formatTime(event?.start_time)}
                     {event?.end_time
@@ -76,7 +87,7 @@ const EventShowPage = async ({ params }) => {
                       : " ONWARDS"}
                   </span>
 
-                  <span className=" text-orange-700 text-lg uppercase font-bold">
+                  <span className=" text-orange-500 text-lg uppercase font-bold">
                     <span className=" text-gray-600 text-lg mr-2">@</span>
                     {event.venue || "LOCATION NAME HERE"}
                   </span>
@@ -87,7 +98,6 @@ const EventShowPage = async ({ params }) => {
 
               <Purifire description={event?.description} />
             </div>
-
             {/* EVENT IMAGE */}
             <div className=" -mt-56 space-y-4 md:space-y-6 order-1 md:order-2 mb-4">
               <div className="relative w-full aspect-square rounded-xl overflow-hidden shadow-lg">
@@ -99,6 +109,7 @@ const EventShowPage = async ({ params }) => {
                   }
                   alt="Event poster"
                   fill
+                  priority
                   className="object-contain"
                 />
               </div>

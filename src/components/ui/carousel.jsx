@@ -3,6 +3,7 @@
 import * as React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import Fade from "embla-carousel-fade";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -23,6 +24,7 @@ export function Carousel({
   slidesToShow = 1,
   autoplayDelay = 3500,
   breakpoints,
+  fade = false, // ✅ NEW PROP
   className,
   children,
   ...props
@@ -36,42 +38,46 @@ export function Carousel({
     }),
   );
 
+  const plugins = React.useMemo(() => {
+    const list = [autoplayRef.current];
+    if (fade) list.push(Fade());
+    return list;
+  }, [fade]);
+
   const [carouselRef, api] = useEmblaCarousel(
     {
-      axis: orientation === "horizontal" ? "x" : "y",
+      axis: fade ? "x" : orientation === "horizontal" ? "x" : "y",
       loop: true,
       align: "start",
     },
-    [autoplayRef.current],
+    plugins,
   );
 
   const scrollPrev = () => api?.scrollPrev();
   const scrollNext = () => api?.scrollNext();
 
   const [currentSlides, setCurrentSlides] = React.useState(slidesToShow);
-  const [gap, setGap] = React.useState(16); // default gap-4
+  const [gap, setGap] = React.useState(16);
 
   React.useEffect(() => {
-    if (!breakpoints) return;
+    if (!breakpoints || fade) return; // ❗ no responsive math in fade mode
 
     const handleResize = () => {
       const width = window.innerWidth;
 
-      // slides per view
       if (width >= 1024 && breakpoints.lg) setCurrentSlides(breakpoints.lg);
       else if (width >= 768 && breakpoints.md) setCurrentSlides(breakpoints.md);
       else if (width >= 640 && breakpoints.sm) setCurrentSlides(breakpoints.sm);
       else if (breakpoints.xs) setCurrentSlides(breakpoints.xs);
       else setCurrentSlides(slidesToShow);
 
-      // responsive gap
-      setGap(width >= 1024 ? 24 : 16); // sm:gap-6
+      setGap(width >= 1024 ? 24 : 16);
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [breakpoints, slidesToShow]);
+  }, [breakpoints, slidesToShow, fade]);
 
   return (
     <CarouselContext.Provider
@@ -79,8 +85,9 @@ export function Carousel({
         carouselRef,
         api,
         orientation,
-        slidesToShow: currentSlides,
+        slidesToShow: fade ? 1 : currentSlides,
         gap,
+        fade,
         scrollPrev,
         scrollNext,
       }}
@@ -93,15 +100,17 @@ export function Carousel({
 }
 
 export function CarouselContent({ className, ...props }) {
-  const { carouselRef, orientation } = useCarousel();
+  const { carouselRef, orientation, fade } = useCarousel();
 
   return (
     <div ref={carouselRef} className="overflow-hidden">
       <div
         className={cn(
-          orientation === "horizontal"
-            ? "flex gap-4 lg:gap-6"
-            : "flex flex-col gap-4 lg:gap-6",
+          fade
+            ? "flex"
+            : orientation === "horizontal"
+              ? "flex gap-4 lg:gap-6"
+              : "flex flex-col gap-4 lg:gap-6",
           className,
         )}
         {...props}
@@ -111,7 +120,21 @@ export function CarouselContent({ className, ...props }) {
 }
 
 export function CarouselItem({ className, ...props }) {
-  const { slidesToShow, gap } = useCarousel();
+  const { slidesToShow, gap, fade } = useCarousel();
+
+  if (fade) {
+    return (
+      <div
+        role="group"
+        aria-roledescription="slide"
+        className={cn(
+          "min-w-full shrink-0 rounded-lg shadow-md bg-background",
+          className,
+        )}
+        {...props}
+      />
+    );
+  }
 
   const totalGap = gap * (slidesToShow - 1);
 

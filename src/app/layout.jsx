@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} 
-         ${londrinaOutline.variable} antialiased`}
+         ${londrinaOutline.variable} antialiased bg-white select-none`}
       >
         {process.env.COMING_SOON_MODE === "true" ? (
           <ComingSoonMode />

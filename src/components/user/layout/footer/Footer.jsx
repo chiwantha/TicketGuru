@@ -64,7 +64,7 @@ const Footer = () => {
       <div className=" bg-orange-600 ">
         <WidthFitter>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 border-t border-t-orange-700 py-12 items-center">
-            <div className="bg-white rounded-lg col-span-2 shadow-md p-6 flex flex-col items-center justify-center space-y-4">
+            <div className="bg-white rounded-lg grid-cols-1 sm:col-span-2 shadow-md p-6 flex flex-col items-center justify-center space-y-4">
               <div className="relative aspect-video w-[60%] sm:w-[40%]">
                 <Image
                   src={`/logo/LogoDark.png`}
@@ -98,7 +98,7 @@ const Footer = () => {
               <div className="flex-col flex items-end space-y-1">
                 {links.map((link, index) => (
                   <Link href={link.path} key={index}>
-                    <span className="text-xl font-medium hover:font-bold transition-all duration-300 text-white uppercase">
+                    <span className="md:text-xl font-medium hover:font-bold transition-all duration-300 text-white ">
                       {link.title} -
                     </span>
                   </Link>
@@ -112,7 +112,7 @@ const Footer = () => {
               <div className="flex-col flex items-start space-y-1">
                 {contact.map((con, index) => (
                   <span
-                    className="text-xl font-medium hover:font-bold transition-all duration-300 text-white uppercase"
+                    className="md:text-xl font-medium hover:font-bold transition-all duration-300 text-white "
                     key={index}
                   >
                     - {con.value}

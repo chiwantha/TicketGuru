@@ -2,12 +2,12 @@ import WidthFitter from "@/components/common/layout/widthFitter/WidthFitter";
 import Skeleton from "@/components/common/skeleton/Skeleton";
 
 import Button from "@/components/user/button/button/Button";
-import AdsSlider from "@/components/user/layout/sections/ads_slider/AdsSlider";
-import EventGrid from "@/components/user/layout/sections/event_grid/EventGrid";
-import Hero from "@/components/user/layout/sections/hero/Hero";
+import AdsSlider from "@/components/user/grids/ads_slider/AdsSlider";
+import EventGrid from "@/components/user/grids/event_grid/EventGrid";
+import Hero from "@/components/user/sections/hero/Hero";
 import { Suspense } from "react";
 
-const forced_dynamic = 0;
+export const dynamic = "force-dynamic";
 
 const Homepage = async () => {
   return (
@@ -16,7 +16,6 @@ const Homepage = async () => {
       <section className="">
         <Hero />
       </section>
-
       <section className=" bg-white overflow-hidden">
         {/* Background Image */}
         <div
@@ -68,8 +67,6 @@ const Homepage = async () => {
           </div>
         </WidthFitter>
       </section>
-
-      <div className=""></div>
     </main>
   );
 };

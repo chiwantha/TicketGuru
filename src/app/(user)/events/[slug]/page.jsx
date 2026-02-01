@@ -1,9 +1,9 @@
 import WidthFitter from "@/components/common/layout/widthFitter/WidthFitter";
 import Image from "next/image";
-import Purifire from "@/components/user/purifire/Purifire";
+import Purifire from "@/components/common/purifire/Purifire";
 import { formatTime } from "@/lib/herper";
-import EventMap from "@/components/user/layout/sections/eventMap/EventMap";
-import TicketModal from "@/components/user/ticketTailor/TicketTailorWidget";
+import EventMap from "@/components/user/widgets/eventMap/EventMap";
+import TicketModal from "@/components/user/widgets/ticketTailor/TicketTailorWidget";
 
 async function get_event(slug) {
   try {
@@ -51,7 +51,7 @@ const EventShowPage = async ({ params }) => {
 
       <WidthFitter>
         <div className="">
-          <div className="grid grid-cols-1 md:grid-cols-3 py-6 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 py-6  md:gap-6">
             {/* EVENT CONTENT */}
             <div className="sm:col-span-2 flex flex-col space-y-6 order-2 md:order-1 ">
               <div>
@@ -59,15 +59,17 @@ const EventShowPage = async ({ params }) => {
                   Ticketguru Proudly Presents
                 </span>
 
-                <h2 className="text-2xl md:text-6xl font-black text-gray-700 uppercase">
+                <h2 className="text-4xl py-2 md:text-6xl font-black text-gray-700 uppercase">
                   {event.name || "EVENT NAME HERE"}
                 </h2>
 
-                <div className="mt-2 flex flex-col sm:flex-row gap-2 -space-y-2">
-                  <span className=" text-orange-700 md:text-lg uppercase font-bold">
-                    <span className=" text-gray-600  md:text-lg mr-2">
-                      FROM
-                    </span>
+                <div className="flex flex-col sm:flex-row sm:gap-2 -space-y-2">
+                  <span className=" text-orange-700 text-lg uppercase font-bold">
+                    <span className=" text-gray-600  text-lg mr-2">ON</span>
+                    {event.date?.split("T")[0]}
+                  </span>
+                  <span className=" text-orange-700 text-lg uppercase font-bold">
+                    <span className=" text-gray-600  text-lg mr-2">FROM</span>
                     {formatTime(event?.start_time)}
                     {event?.end_time
                       ? " - " + formatTime(event.end_time)
@@ -87,7 +89,7 @@ const EventShowPage = async ({ params }) => {
             </div>
 
             {/* EVENT IMAGE */}
-            <div className=" rounded-xl -mt-56 space-y-4 md:space-y-6 order-1 md:order-2">
+            <div className=" -mt-56 space-y-4 md:space-y-6 order-1 md:order-2 bg-red-700 mb-4">
               <div className="relative w-full aspect-square rounded-xl overflow-hidden shadow-lg">
                 <Image
                   src={

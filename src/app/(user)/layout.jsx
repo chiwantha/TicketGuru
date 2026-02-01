@@ -1,6 +1,6 @@
 import Navbar from "@/components/user/layout/navbar/Navbar";
 import React from "react";
-import Newsletter from "../../components/user/layout/sections/newsletter/Newsletter";
+import Newsletter from "../../components/user/sections/newsletter/Newsletter";
 import Footer from "@/components/user/layout/footer/Footer";
 
 const layout = ({ children }) => {

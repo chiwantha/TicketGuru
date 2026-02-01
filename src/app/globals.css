@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  color-scheme: light;
+}
+
 .font-londrina-outline {
   font-family: var(--font-londrina-outline);
 }

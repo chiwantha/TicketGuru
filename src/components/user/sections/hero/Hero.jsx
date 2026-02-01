@@ -76,6 +76,7 @@ const Hero = () => {
             wfull={false}
             fg={"font-medium text-white text-lg xl:text-xl uppercase"}
             pd={"px-6 py-1.5"}
+            link={"/events"}
           />
           <Button
             title={"About"}

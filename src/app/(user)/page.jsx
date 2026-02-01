@@ -41,6 +41,7 @@ const Homepage = async () => {
               </p>
             </div>
 
+            {/* events slider */}
             <Suspense
               fallback={
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 lg:gap-6">
@@ -72,6 +73,7 @@ const Homepage = async () => {
               wfull={false}
               fg="font-medium text-white text-lg uppercase self-center"
               pd="px-6 py-1.5"
+              link={`/events`}
             />
           </div>
         </WidthFitter>

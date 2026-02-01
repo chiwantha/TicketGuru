@@ -43,7 +43,7 @@ const Homepage = async () => {
 
             <Suspense
               fallback={
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 lg:gap-6">
                   <Skeleton skfor={`event_card`} />
                   <Skeleton skfor={`event_card`} />
                   <Skeleton skfor={`event_card`} />
@@ -55,7 +55,16 @@ const Homepage = async () => {
             </Suspense>
 
             {/* ads slider */}
-            <AdsSlider />
+            <Suspense
+              fallback={
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+                  <div className=" rounded-lg shadow-md aspect-video overflow-hidden bg-gray-300 animate-pulse delay-75 sm:block hidden" />
+                  <div className=" rounded-lg shadow-md aspect-video overflow-hidden bg-gray-300 animate-pulse delay-75" />
+                </div>
+              }
+            >
+              <AdsSlider />
+            </Suspense>
 
             {/* Button */}
             <Button

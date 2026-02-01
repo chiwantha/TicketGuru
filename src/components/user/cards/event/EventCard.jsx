@@ -139,7 +139,7 @@ const EventCard = ({ event = {} }) => {
         </h3>
 
         <div className="flex flex-col uppercase -space-y-1.5 text-orange-500 -mt-1">
-          <span className="font-bold text-lg">
+          <span className="font-bold text-lg line-clamp-1 text-ellipsis">
             {start ? `${start} - ${end || "ONWARDS"}` : "00:00 - 00:00"}
           </span>
 

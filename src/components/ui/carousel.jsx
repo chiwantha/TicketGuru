@@ -65,7 +65,7 @@ export function Carousel({
       else setCurrentSlides(slidesToShow);
 
       // responsive gap
-      setGap(width >= 640 ? 24 : 16); // sm:gap-6
+      setGap(width >= 1024 ? 24 : 16); // sm:gap-6
     };
 
     handleResize();
@@ -100,8 +100,8 @@ export function CarouselContent({ className, ...props }) {
       <div
         className={cn(
           orientation === "horizontal"
-            ? "flex gap-4 sm:gap-6"
-            : "flex flex-col gap-4 sm:gap-6",
+            ? "flex gap-4 lg:gap-6"
+            : "flex flex-col gap-4 lg:gap-6",
           className,
         )}
         {...props}

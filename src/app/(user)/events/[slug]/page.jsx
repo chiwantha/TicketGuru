@@ -36,27 +36,17 @@ const EventShowPage = async ({ params }) => {
     <div className="flex flex-col">
       {/* Event banner */}
       <div className="relative w-full h-100 bg-black">
-        {event.banner_img ? (
-          <Image
-            src={`/event/banner/${event.banner_img}`}
-            alt="Event banner"
-            fill
-            className="object-cover object-center"
-          />
-        ) : (
-          <div className="absolute inset-0 overflow-hidden">
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `url(/event/face/${event.face_img})`,
-                backgroundRepeat: "repeat",
-                backgroundSize: "150px", // tile size
-              }}
-            />
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/50" />
-          </div>
-        )}
+        <Image
+          src={
+            event.banner_img
+              ? `/event/banner/${event.banner_img}`
+              : `/event/face/${event.face_img}`
+          }
+          alt="Event banner"
+          fill
+          className="object-cover object-center"
+        />
+
         <div className="absolute inset-0 bg-black/50" />
       </div>
 

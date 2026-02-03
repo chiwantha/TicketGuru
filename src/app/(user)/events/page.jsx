@@ -6,7 +6,8 @@ import React from "react";
 
 export const dynamic = "force-dynamic";
 
-const EventsPage = () => {
+const EventsPage = async () => {
+  await new Promise((r) => setTimeout(r, 2500));
   return (
     <div className=" space-y-6">
       <div className="relative flex flex-col items-center justify-center -z-40 h-100 bg-black">

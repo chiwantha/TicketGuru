@@ -7,7 +7,7 @@ import Image from "next/image";
 
 async function get_Ads() {
   try {
-    await new Promise((r) => setTimeout(r, 3000));
+    // await new Promise((r) => setTimeout(r, 3000));
 
     const res = await fetch(`${process.env.NEXT_BASE_URL}/api/user/ads`, {
       cache: "no-store",

@@ -44,7 +44,7 @@ const EventShowPage = async ({ params }) => {
           }
           alt="Event banner"
           fill
-          className="object-cover object-center"
+          className={`object-cover object-center ${!event.banner_img && "blur-sm"}`}
         />
 
         <div className="absolute inset-0 bg-black/50" />

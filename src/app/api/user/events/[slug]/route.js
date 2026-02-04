@@ -23,7 +23,7 @@ export const GET = async (request, { params }) => {
     events.sale
      FROM events
      INNER JOIN mst_category ON mst_category.id = events.category_id
-     INNER JOIN ticket_tailor_link ON ticket_tailor_link.event_id = events.id
+     LEFT JOIN ticket_tailor_link ON ticket_tailor_link.event_id = events.id
      WHERE events.slug=?`;
 
     const event = await query(sql, [slug]);

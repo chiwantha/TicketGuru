@@ -7,6 +7,7 @@ import { ticket_btn_ui } from "@/constant/styles";
 const TicketModal = ({ tt_id, chekout_hash }) => {
   const [isOpen, setIsOpen] = useState(false);
   const widgetRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const hasTicket = Boolean(tt_id);
 
@@ -17,6 +18,9 @@ const TicketModal = ({ tt_id, chekout_hash }) => {
 
   useEffect(() => {
     if (!isOpen || !hasTicket || !widgetRef.current) return;
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsLoading(true);
 
     // Prevent duplicate script injection
     if (widgetRef.current.querySelector("script")) return;
@@ -34,6 +38,7 @@ const TicketModal = ({ tt_id, chekout_hash }) => {
     script.setAttribute("data-inline-ref", "dsa");
 
     widgetRef.current.appendChild(script);
+    setIsLoading(false);
   }, [isOpen, hasTicket, ticketUrl]);
 
   return (
@@ -59,24 +64,27 @@ const TicketModal = ({ tt_id, chekout_hash }) => {
             </button>
 
             {hasTicket ? (
-              <div className="tt-widget" ref={widgetRef}>
-                <div className="tt-widget-fallback">
-                  <p>
-                    <a href={ticketUrl} target="_blank" rel="noreferrer">
-                      Click here to buy tickets
-                    </a>
-                    <br />
-                    <small>
+              !isLoading ? (
+                <div className="tt-widget" ref={widgetRef}>
+                  <div className="tt-widget-fallback">
+                    <p>
                       <a
-                        href="https://www.tickettailor.com?rf=wdg_285205"
-                        className="tt-widget-powered"
+                        href={ticketUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="p-4 text-lg bg-orange-600 rounded-lg shadow-md text-white"
                       >
-                        Sell tickets online with Ticket Tailor
+                        Click here to buy tickets
                       </a>
-                    </small>
-                  </p>
+                      <br />
+                    </p>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="py-16 text-center">
+                  <h3 className="text-xl font-semibold">🎟 Tickets Loading</h3>
+                </div>
+              )
             ) : (
               <div className="py-16 text-center">
                 <h3 className="text-xl font-semibold">

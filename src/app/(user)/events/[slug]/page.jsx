@@ -9,7 +9,7 @@ async function get_event(slug) {
   try {
     const res = await fetch(
       `${process.env.NEXT_BASE_URL}/api/user/events/${slug}`,
-      { next: { revalidate: 60 } },
+      { cache: "no-store" },
     );
 
     if (!res.ok) {
@@ -104,7 +104,7 @@ const EventShowPage = async ({ params }) => {
                 />
               </div>
               <TicketModal
-                tt_id={event.tt_id}
+                tt_id={event.tt_event_id}
                 chekout_hash={event.checkout_hash}
               />
             </div>

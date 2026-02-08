@@ -6,7 +6,7 @@ export const GET = async (request, { params }) => {
     const { slug } = await params;
 
     const sql = `SELECT 
-    ticket_tailor_link.tt_id,
+    ticket_tailor_link.tt_event_id,
     ticket_tailor_link.checkout_hash,
     events.name,
     mst_category.category,

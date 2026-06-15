@@ -133,3 +133,61 @@ export const Order_Create_data = {
   total_paid: 100,
   txn_id: "pi_3SxrlhQovdKy7lWT0A57XYlj",
 };
+
+export const eventsList = [
+  {
+    name: "Shreya Ghoshal Live in Birmingham",
+    category: "Singer Event",
+    start_time: "19:00:00",
+    end_time: "22:00:00",
+    venue: "Utilita Arena Birmingham",
+    date: "2026-08-15",
+    face_img: "shreya-ghoshal-birmingham.png",
+    card_description:
+      "Experience an unforgettable evening with Shreya Ghoshal performing her greatest hits live in Birmingham.",
+    slug: "shreya-ghoshal-live-birmingham",
+    sale: 0,
+  },
+
+  {
+    name: "London Party Boat",
+    category: "Boat Party",
+    start_time: "20:00:00",
+    end_time: "01:00:00",
+    venue: "Thames River Pier",
+    date: "2026-07-25",
+    face_img: "boat_party.png",
+    card_description:
+      "Cruise through London's iconic skyline with live DJs, drinks, dancing, and amazing views.",
+    slug: "london-party-boat",
+    sale: 0,
+  },
+
+  {
+    name: "Ife Business Networking Summit",
+    category: "Business",
+    start_time: "09:00:00",
+    end_time: "17:00:00",
+    venue: "London Business Centre",
+    date: "2026-09-10",
+    face_img: "ife-business-networking.png",
+    card_description:
+      "Connect with entrepreneurs, investors, and business leaders at one of London's premier networking events.",
+    slug: "life-business-networking-summit",
+    sale: 0,
+  },
+
+  {
+    name: "Summer Music Festival",
+    category: "Festival",
+    start_time: "14:00:00",
+    end_time: "23:00:00",
+    venue: "Hyde Park",
+    date: "2026-08-02",
+    face_img: "default.png",
+    card_description:
+      "A full day of live music, food, entertainment, and unforgettable festival vibes.",
+    slug: "summer-music-festival",
+    sale: 0,
+  },
+];

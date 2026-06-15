@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
         ) : (
           children
         )}
-        {process.env.NODE_ENV === "development" && <WidthTracker />}
+        {/* {process.env.NODE_ENV === "development" && <WidthTracker />} */}
       </body>
     </html>
   );

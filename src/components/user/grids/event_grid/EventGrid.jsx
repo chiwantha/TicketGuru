@@ -1,5 +1,6 @@
 import Skeleton from "@/components/common/skeleton/Skeleton";
 import EventCard from "@/components/user/cards/event/EventCard";
+import { eventsList } from "@/constant/dummy";
 
 async function get_event_cards(limit) {
   try {
@@ -24,7 +25,7 @@ async function get_event_cards(limit) {
 }
 
 const EventGrid = async ({ cards }) => {
-  const events = await get_event_cards(cards);
+  const events = eventsList;
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 lg:gap-6">
       {events && events.length > 0 ? (

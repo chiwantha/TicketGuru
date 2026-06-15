@@ -5,28 +5,20 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 
-async function get_Ads() {
-  try {
-    // await new Promise((r) => setTimeout(r, 3000));
-
-    const res = await fetch(`${process.env.NEXT_BASE_URL}/api/user/ads`, {
-      cache: "no-store",
-    });
-
-    if (!res.ok) {
-      console.log(`Failed to Fetch Ads : ${res.status}`);
-      return { ads: [] };
-    }
-
-    return await res.json();
-  } catch (err) {
-    console.log(`Error Fetching Ads : ${err}`);
-    return { ads: [] };
-  }
-}
+const adsList = [
+  {
+    image: `boat-party-2026.png`,
+  },
+  {
+    image: `erabadu-wasanthaya-2026-dubai.png`,
+  },
+  {
+    image: `ticket-guru-2026.png`,
+  },
+];
 
 const AdsSlider = async () => {
-  const ads = await get_Ads();
+  const ads = adsList;
 
   return (
     <div className="grid grid-cols-1">
